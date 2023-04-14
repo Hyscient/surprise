@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Surprise</title>
+	<style type="text/css">
+		body {
+			background-image: url(roads.jpg);
+			background-size: cover;
+			background-position: center;
+			font-family: Arial, sans-serif;
+			color: rgb(197, 197, 214);
+		}
+
+		button {
+			background-color: #ff69b4;
+			color: rgb(54, 45, 45);
+			border: none;
+			padding: 10px 20px;
+			font-size: 16px;
+			border-radius: 5px;
+			margin: 10px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #968aff;
+		}
+	</style>
+	<script type="text/javascript">
+		function showOptions() {
+			document.getElementById("options").style.display = "block";
+			document.getElementById("question").style.display = "none";
+		}
+
+		function showResponse(response) {
+			if (response === "yes") {
+				document.getElementById("response").innerHTML = "Great! I'll plan something special for us.";
+				// Send response to server or log it to console
+				console.log("She said yes!");
+			} else {
+				document.getElementById("response").innerHTML = "That's okay. Maybe some other time.";
+				// Send response to server or log it to console
+				console.log("She said no.");
+			}
+			document.getElementById("options").style.display = "none";
+			document.getElementById("response").style.display = "block";
+		}
+	</script>
+</head>
+<body>
+	<div id="question">
+		<h1>I think you are one of the few cutest people I have met. You are very cute, smart and I enjoy talking and having intellectual conversations with you and I think I like you and I would definitely love to get to know you better. If I ever get the chance to be more than friends, I will wholely take it. I'm not in a rush, I am stating my intentions.☺️
+            Do you want to go out with me maybe this weekend?</h1>
+		<button onclick="showOptions()">Click here to choose your answer</button>
+	</div>
+	<div id="options" style="display: none;">
+			<h1>Choose your answer:</h1>
+			<button onclick="showResponse('yes')">Yes</button>
+			<button onclick="showResponse('no')">No</button>
+	</div>
+	<div id="response" style="display: none;"></div>
+
+    <script type="text/javascript">
+        function showOptions() {
+            document.getElementById("options").style.display = "block";
+            document.getElementById("question").style.display = "none";
+        }
+    
+        function showResponse(response) {
+            if (response === "yes") {
+                document.getElementById("response").innerHTML = "Great! I'll plan something special for us.";
+                // Send response to server
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'send-email.php');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send('response=yes');
+            } else {
+                document.getElementById("response").innerHTML = "That's okay. Maybe some other time.";
+                // Send response to server
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'send-email.php');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send('response=no');
+            }
+            document.getElementById("options").style.display = "none";
+            document.getElementById("response").style.display = "block";
+        }
+    </script>
+    
+
+
+</body>
+</html>
